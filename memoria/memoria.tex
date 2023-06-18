@@ -1,0 +1,161 @@
+% ---------------------------------------------------------------------
+%                      DOCUMENTO DE EJEMPLO
+%          QUE UTILIZA LA PLANTILLA DE LA EDITORIAL DE LA
+%                UNIVERSITAT POLITÈCNICA DE VALÈNCIA
+%                  PARA TRABAJOS DE FIN DE GRADO
+%                         CAMPUS D'ALCOI
+% ---------------------------------------------------------------------
+
+\documentclass[tfg, rm, valencia]{tfgepsa}
+
+% Opciones de la clase 'tfgepsa'
+%
+% tfg		  - Format TFG
+% imprimir    - Doble cara márgenes horizontales asimétricos (parar imprimir)
+% ebookpdf    - Formato PDF para tabletas
+% rm          - Tipo de letra roman
+% sf          - Tipo de letra sanserif
+%
+% nomathskip  - No se modifican las distancias de las ecuaciones 
+%
+% castellano  - El TFG está escrito en castellano
+% valencia    - El TFG està escrit en valencià
+% english     - El TFG está escrito en inglés
+
+% ---------------------------------------------------------------------
+% Configuraciones presonalizadas 
+
+\input{./configuraciones/preambulo}
+\input{./configuraciones/preambulo_listings_LaTeX}
+
+\bibliography{./bibliografia.bib}
+
+% ---------------------------------------------------------------------
+% Las carpetas para los gráficos
+
+\graphicspath{
+	{./figuras/}
+	{./logos/}
+	}
+
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+
+\Titulo{Modelat acústic per al reconeixement automàtic de la parla en directe}
+\Alumnoa{Jaume Santamaría Jordà}
+%\Tutores{Joan Albert Silvestre Cerdà; Arreglar per a cotutors}
+%\Tutores{Joan Albert Silvestre Cerdà\\José Alberto Sanchis Navarro (2n)\\Adrià Giménez (cotut)\\Gonçal(dir exp)}
+\TutorUno{Joan Albert Silvestre Cerdà}
+\TutorDos{José Alberto Sanchis Navarro}
+\CotutExt{Adrià Giménez Pastor}
+\DirecExp{Gonçal Garcés Díaz-Munío}
+% Segon tutor: José Alberto Sanchis Navarro
+% Co-tutor extern: Adrià Giménez
+% Director experimental: Gonçal
+\Titulacion{GRAU EN ENGINYERIA INFORMÀTICA}
+\Convocatoria{¿¿¿¿ Juliol de 2022 ????}
+
+%\Titulo{\huge Cuando el título del TFG es muy muy muy largo, utiliza este comando para conseguir que la información de la portada esté contenida en una sola página. De lo contrario se genera una salida no deseada: una página en blanco y el título del TFG está en una página diferente a la información del autor y tutores}
+
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+
+\begin{document}
+
+% -------------------------------------------------------
+
+\frontmatter
+
+% -------------------------------------------------------
+% Página de título
+
+\maketitle	
+
+% -------------------------------------------------------
+% Resumen, prólogo o prefacio
+
+\cleardoublepage
+\thispagestyle{empty}
+\phantomsection
+\addcontentsline{toc}{chapter}{\abstractname}
+
+\input{cap00_Resum}
+
+% -------------------------------------------------------
+% Índice: tabla de contenidos
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\contentsname}
+
+\tableofcontents
+
+% -------------------------------------------------------
+% Lista de figuras
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+
+\listoffigures
+
+% -------------------------------------------------------
+% Lista de tablas
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
+
+\listoftables
+
+% -------------------------------------------------------
+% Numeración de páginas números arábicos
+% Primer capítulo en página 1
+
+\mainmatter
+
+% -------------------------------------------------------
+% -------------------------------------------------------
+% -------------------------------------------------------
+% Capítulos de la publicación
+
+\input{cap01_Introduccio}
+
+\input{cap02_Fonaments}
+
+\input{cap03_Mod_Acus}
+
+\input{cap04_Corpora}
+
+\input{cap05_Experi_Aval}
+
+\input{cap06_Conc_Futur}
+
+% -------------------------------------------------------
+% -------------------------------------------------------
+% -------------------------------------------------------
+% Bibliografía
+
+\bibitemsep = 3ex
+\bibhang = 2em
+
+\printbibliography[heading=bibintoc,title=\bibname]
+
+
+% -------------------------------------------------------
+% Índice alfabético
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\indexname}
+
+\printindex
+
+% -------------------------------------------------------
+% Fin del documento
+
+\end{document}
+
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------

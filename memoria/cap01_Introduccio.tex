@@ -1,0 +1,87 @@
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+
+\chapter{Introducció}
+\label{cap01__}
+
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+
+\section{Motivació}
+\label{cap01_motivacio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%   Què es el ASR?
+%%%
+El reconeixement automàtic de la parla, (Automatic Speech Recognition, ASR), és un camp multidisciplinari de la ciència i lingüística computacional que ens permet obtenir la transcripció de la parla humana present en una senyal acústica.
+Gràcies a la capacitat de realitzar aquesta tasca de manera indefinida i sense pausa, junt amb les millores tecnològiques i a les idees innovadores en termes d'inte\lgem igència artificial, aquesta branca ha augmentat l'interés per part de la indústria i del personal investigador, fent d'aquesta, una de les disciplines més populars hui dia.
+De fet, des de fa un temps fins ara, les prestacions dels sistemes ASR han augmentat notòriament, tenint una taxa d'error cada vegada menor, que, en certes tasques, com per exemple la transcripció de debats parlamentaris (Europarl-ASR~\cite{diazmunio21_interspeech}) o audiollibres (LibriSpeech~\cite{https://doi.org/10.48550/arxiv.2204.10586}), és equiparable a l'error humà~\cite{https://doi.org/10.48550/arxiv.2203.12668}.
+
+% taxa d'error en 1997
+% https://www.sciencedirect.com/science/article/abs/pii/S0167639397000216
+% però aquest diu que la taxa d'error humana es realment major
+% https://www.microsoft.com/en-us/research/wp-content/uploads/2017/06/paper-revised2.pdf
+% Taxa d'error 2017 -> https://arxiv.org/abs/1703.02136
+% Taxa d'error actual -> https://arxiv.org/pdf/2105.00982.pdf
+
+L'ASR ha estat rebent molta atracció aquests anys, sobretot en el camp de la generació de transcripcions de vídeo i àudio, en diferit (off-line) i en temps real (streaming). L'actual crisi ocasionada per la COVID-19 va fer que tot el món passara a treballar i estudiar de forma telemàtica, moment en el qual, aquestes ferramentes, van ser de gran ajuda per a transcriure repositoris multimèdia de tota mena (acadèmic, científic, polític...) i la subtitulació en temps real en plataformes de videoconferència, com Zoom o Teams, que d'altra manera no haguera sigut possible amb tan poc marge temporal.
+
+També resulta molt interessant el camp de l'\textit{Internet de les Coses} (IoT), ja que, a causa de la normalització dels assistents de veu, com Alexa (Amazon)\footnote{\url{https://developer.amazon.com/es-ES/alexa}}, Cortana (Microsoft)\footnote{\url{https://www.microsoft.com/es-es/}}, Google Assistant (Google)\footnote{\url{https://assistant.google.com/intl/es_es/}} o Siri (Apple)\footnote{\url{https://www.apple.com/es/siri/}}, podem automatitzar diferents tasques de la nostra vida diària, inclús de la nostra casa o, específicament, millorar la qualitat de vida de persones amb alguna discapacitat motora, lingüística o cognitiva, on és necessària una correcta comprensió de les ordres donades i, per tant, un entrenament de les eines inclusiu \cite{masina2020accesibility}.
+Addicionalment en altres camps, com el de la navegació terrestre, naval o aèria, on permeten fer operacions mentre es manipulen diferents controls i minimitzar els possibles accidents o problemes generats per falta d'atenció.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%   Informació MLLP
+%%%
+El grup d'investigació \textit{Machine Learning and Language Processing}\footnote{\href{https://mllp.upv.es}{https://mllp.upv.es}} (MLLP), integrat a l'\textit{Institut Valencià d'Investigació en Inte\lgem igència Artificial}\footnote{\href{https://vrain.upv.es}{https://vrain.upv.es}} (VRAIN) de la UPV, porta des de 2014 realitzant projectes de diferents àmbits i investigant al camp del reconeixement automàtic de la parla.
+L'any 2017, en el marc del projecte EMMA~\cite{emma_project}, va desenvolupar un sistema ASR de la llengua francesa. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%   Marc del projecte 
+%%%
+Recentment, l'MLLP-VRAIN va guanyar una licitació del Conseil Européen pour la Recherche Nucléaire\footnote{\href{https://cern.ch}{https://cern.ch}} (CERN), per a la provisió de serveis de subtitulació automàtica multilingüe, en temps real (streaming) i en diferit, en les llengües oficials al centre d'investigació: l'anglés i el francés. 
+Pel fet que el sistema ASR francés del qual disposa el grup ha quedat obsolet a nivell tecnològic pel pas del temps, i especialment, pel fet que aquest no permet treballar en streaming, el propòsit i motivació principal d'aquest treball ha sigut construir i avaluar un nou sistema d'streaming-ASR de la llengua francesa amb tecnologia híbrida d'avantguarda. 
+Donada la complexitat dels sistemes ASR híbrids actuals, el present treball s'ha limitat al desenvolupament, optimització, avaluació i integració dels models acústics que formen part del sistema final.
+Aquest serà, finalment, desplegat en producció, donant servei tant al CERN, com al repositori Media[UPV]\footnote{\href{https://media.upv.es}{https://media.upv.es}}, el repositori institucional de la UPV.
+
+
+\section{Objectius}
+\label{cap01_objectius}
+
+Els principals objectius d'aquest treball són els següents:
+
+\begin{itemize}
+    \item Comprendre els conceptes teòrics necessaris per a desenvolupar sistemes ASR.
+
+    \item Aplicar conceptes generals d'avantguarda relacionats amb l'entrenament d'un sistema ASR d'aplicació real.
+    
+    \item Emprar ferramentes software avançades per a desenvolupar i entrenar un sistema ASR punter.
+    
+    \item Optimitzar els paràmetres dels sistemes ASR per adaptar-los a una tasca o domini concret.
+    
+    \item Avaluar les prestacions dels sistemes ASR desenvolupats.
+    
+    \item Comparar el rendiment d'aquests sistemes amb el sistema equivalent de l'any 2017 per esclarir el paper de les millores tecnològiques.
+
+\end{itemize}
+
+\section{Estructura del document}
+\label{cap01_estructura_doc}
+
+Aquest document està dividit en sis capítols:
+
+\begin{itemize}
+    \item Capítol \ref{cap01__}, on s'explica la motivació per a crear un sistema ASR i els objectius d'aquest treball, així com l'estructura del document.
+    \item Capítol \ref{cap02__}, que proporciona a la lectora els coneixements teòrics i tecnològics previs necessaris per entendre el treball realitzat.
+    \item Capítol \ref{cap03__}, on s'explica pas a pas, i de manera conceptual, el procés d'entrenament de models acústics híbrids.
+    \item Capítol \ref{cap04__}, que presenta i descriu els conjunts de dades de text i parla transcrita emprats en aquest treball per entrenar, optimitzar i avaluar els models acústics desenvolupats i els sistemes ASR que se'n deriven.
+    \item Capítol \ref{cap05__}, on es detallen tots els passos que han conduït a la construcció i optimització dels diferents sistemes ASR híbrids proposats, juntament amb la seva configuració experimental i els resultats d'avaluació.
+    \item Capítol \ref{cap06__}, que finalitza proporcionant un resum del treball realitzat, les principals conclusions que ens ha fet arribar, i les possibles línies de treball futur.
+\end{itemize}

@@ -1,0 +1,159 @@
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+
+\chapter{Corpora}
+\label{cap04__}
+
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+
+En aquest capítol es presenten les dades que s'han emprat per a entrenar i avaluar els models acústics i de llenguatge, així com els sistemes ASR resultants d'acoblar ambdós components.
+La Secció~\ref{cap04_intro} defineix els conjunts bàsics de dades emprats durant el desenvolupament d'un sistema ASR.
+A continuació, la Secció~\ref{cap04_corpus} presenta les dades utilitzades per a l'entrenament dels models acústics.
+Finalment, la Secció~\ref{cap04_corpus_audio} presenta les dades emprades per investigadors del MLLP-VRAIN per entrenar diferents models del llenguatge utilitzats en aquest treball.
+
+\section{Introducció}
+\label{cap04_intro}
+Quan es parla d'entrenar models estadístics és necessari fer-ho també de les dades emprades, ja que aquesta decisió marca la diferència entre un model que funciona correctament i un altre que no faça el que s'espera, sent així que el rendiment d'un model o sistema entrenat automàticament és tan bo com les dades que es s'usen per a entrenar-lo.
+% Buscar algun paper per a citar amb l'última frase anterior.
+
+Un corpus és una co\lgem ecció de text o àudio transcrit, que pot tindre qualsevol origen, des de premsa escrita i literatura fins a receptes de cuina o missatges de xarxes socials, dins de les dades textuals, i des de programes de ràdio o televisió fins a cursos en línia o vídeos d'entreteniment, per al cas de la parla transcrita.
+
+Per a la construcció, optimització i avaluació de sistemes ASR, cal particionar totes les dades en tres conjunts disjunts:
+\begin{itemize}
+    \item \emph{train}: aquestes dades estan destinades única i exclusivament a entrenar el models acústics o de llenguatge.
+    \item \emph{development (dev)}: aquest conjunt servirà per a optimitzar els hiperparàmetres dels models i del sistema ASR resultant, com també per a verificar que l'entrenament ha sigut correcte, ja que si s'observa un empitjorament en les mètriques d'avaluació (FER, WER), possiblement estem davant d'un cas de sobreajustament, on el model ha \guillemotleft memoritzat\guillemotright ~les mostres de \textit{train} i no ha generalitzat les característiques que les conformen.
+    \item \emph{test}: finalment, aquest set s'empra per obtenir una aproximació del rendiment dels models entrenats. El seu objectiu és mesurar el rendiment que oferiria el sistema final en un entorn de producció real, amb un conjunt de dades no vist mai durant l'entrenament i desenvolupament del sistema.
+\end{itemize}
+
+Com s'ha esmentat anteriorment al Capítol \ref{cap01_objectius}, un dels objectius del projecte és realitzar un estudi de l'impacte de les millores tecnològiques més recents de modelat acústic i de llenguatge sobre les prestacions d'un sistema ASR Francés, en comparació sobre el sistema base (baseline) de l'any 2017, desenvolupat pel grup MLLP-VRAIN de la UPV. Per tal d'obtenir una comparativa el més justa possible, s'empren els mateixos corpus amb els que es van entrenar els models acústics i de llenguatge del sistema ASR de 2017. 
+
+\section{Corpora de parla transcrita}
+\label{cap04_corpus}
+% Corpus de dades d'entrenament i avaluació gastats en l'experimentació.
+Per a la construcció dels models acústics s'han emprat 663 hores de la parla francesa al llarg d'aproximadament 6.8 milions de paraules, transcrites manualment i provinents de tres corpus: PoliMedia (Pm), Universitat de Borgonya (Ub) i Voxforge; a més de tres conglomerats de dades de diversa procedència, agrupats per la seva naturalesa: dades educacionals, dades d'entreteniment i dades parlamentàries. Per simplificar el discurs, s'emprarà el terme \guillemotleft corpus/corpora\guillemotright ~de manera indistinta per a referir-se a ambdós tipus de conjunts de dades.
+A continuació es deixa a la lectora una descripció dels anteriors corpus:
+
+\begin{itemize}
+    \item \textbf{Dades educacionals}: és una co\lgem ecció de xerrades d'esdeveniments educatius de diferent àmbit. Conté un total de 210 fitxers de vídeo d'una duració d'entre 5 i 15 minuts, amb un total de quasi 39 hores de gravació i 392.1K paraules, amb bona qualitat i de diferents interlocutores.
+
+    \item \textbf{Dades d'entreteniment}: aquestes dades pertanyen a diferent material multimèdia d'oci, continguts televisius, i gravacions domèstiques.
+        El corpus té una duració total de quasi 200 hores i 2.1M de paraules, amb multitud d'interlocutores diferents.
+    
+    \item \textbf{Dades parlamentaries}: en aquest corpus tenim dades parlamentàries de diferent índole, es tracta d'una gran quantitat de diferents veus al llarg de 220 fitxers d'àudio i quasi 421 hores de gravació total i amb 4.0M de paraules.
+    
+    \item \textbf{PoliMèdia}: el sistema PoliMèdia~\cite{polimedia} està dissenyat per la Universitat Politècnica de València, on posa a la disposició dels seus estudiants contingut multimèdia com a suport a la docència presencial.
+        En el present projecte es fa ús de vídeos de poliMèdia d'aprenentatge de llengua francesa. 
+        Degut a la seua reduïda grandària, 18 fitxers de vídeo i un total de 2 hores, al llarg de 17.1K paraules. Aquest corpus s'emprarà per als sets de \textit{Dev} i \textit{Test}.
+    
+    \item \guillemotleft \textbf{Cursos MOOC de la Universitat de Borgonya}\guillemotright: en el marc del projecte europeu EMMA~\cite{emma_project} (European Multiple MOOC Aggregator), en el que es va desenvolupar una plataforma oberta per al lliurament de cursos en línia, oberts i gratuïts en diferents llengües de diverses universitats europees. 
+Es van transcriure manualment dos cursos MOOC d'enologia i l'ús d'Internet, amb una duració de quasi 3 hores i 33.4K paraules, per avaluar les prestacions del sistema ASR del grup MLLP de 2017. 
+Per la seua grandària és perfecte per a ser emprat tant en \textit{Dev} com en \textit{Test}.
+Concretament, el MOOC de vins s'empra en \textit{dev} i el d'ús i cerca a internet en \textit{test}.
+    
+    \item \textbf{Voxforge}: es tracta d'un corpus lliure que, com bé diuen en la seua pàgina web~\cite{voxforge} tenen com a objectiu \guillemotleft recollir gravacions de veu amb la seua corresponent transcripció, per a ser utilitzades amb motors de reconeixement de veu de codi lliure\guillemotright.
+        Conté 1631 mostres de diferents persones amb una duració total de quasi 27 hores i 134.6K paraules. 
+\end{itemize}
+
+La taula~\ref{tab:resum_corpus} mostra els sets de \textit{Train}, \textit{Dev} i \textit{Test}, especificant els corpus que els formen, així com la duració de l'àudio per corpus individual, per set i total global.
+
+\begin{table}[ht!]
+    \centering
+    \caption{Resum de duració dels diferents corpus de parla transcrita usats per a entrenament, desenvolupament, i test.}
+    \begin{tabular}{c|l|r|r}
+        \multicolumn{1}{c|}{Set} & \multicolumn{1}{c|}{Corpus} & \multicolumn{1}{c|}{Duració} & \multicolumn{1}{c}{Paraules} \\
+        \hline
+        \centering \multirow{5}{*}{Train}    & Dades educacionals  & $38~\mathrm{h}$ $59~\mathrm{m}$        & 392.1K  \\ 
+                                             & Dades d'entreteniment   & $199~\mathrm{h}$ $3~\mathrm{m}$    & 2.1M \\ 
+                                             & Dades parlamentaries   & $421~\mathrm{h}$ $4~\mathrm{m}$     & 4.0M \\ 
+                                             & Voxforge  & $26~\mathrm{h}$ $35~\mathrm{m}$                  & 134.6K  \\ 
+        \cline{2-4}
+                                             & Total        & $657~\mathrm{h}$ $51~\mathrm{m}$              & 6.7M \\
+        \hline
+        \centering \multirow{3}{*}{Dev}      & Pm   & $1~\mathrm{h}$ $9~\mathrm{m}$                         & 10.7K   \\
+                                             & Ub   & $1~\mathrm{h}$ $20~\mathrm{m}$                        & 13.9K   \\
+        \cline{2-4}
+                                             & Total        & $2~\mathrm{h}$ $29~\mathrm{m}$                & 24.7K   \\
+        \hline
+        \centering \multirow{3}{*}{Test}     & Pm   & $0~\mathrm{h}$ $52~\mathrm{m}$                        & 6.4K    \\
+                                             & Ub   & $1~\mathrm{h}$ $57~\mathrm{m}$                        & 19.4K  \\
+        \cline{2-4}
+                                             & Total        & $2~\mathrm{h}$ $49~\mathrm{m}$                & 25.8K  \\
+        \hline
+        --                                   & Total global        & $663~\mathrm{h}$ $09~\mathrm{m}$       & 6.8M  \\ 
+    \end{tabular}
+    \label{tab:resum_corpus}
+\end{table}
+
+
+\section{Corpora de text monolingüe}
+\label{cap04_corpus_audio}
+% Descriure quins corpus s'han gastat per al LM (parlar amb Gerard)
+
+Per a l'entrenament dels models de llenguatge, desenvolupats per investigadors de l'MLLP-VRAIN, que s'usaran en aquest treball, s'han emprat 15 corpus diferents de text monolingüe francés, que abasten un conjunt d'aproximadament 2.100 milions de paraules. A continuació es descriuen aquests corpus:
+
+\begin{itemize}
+\item \textbf{Audiobooks-1}: és un corpus creat a partir d'audiollibres en francés extrets d'internet. Està format per 18.0K frases amb 258.6K paraules.
+
+\item \textbf{QCRI AMARA}~\cite{amara}: és una col·lecció oberta multilingüe de subtítols per a vídeos educatius i conferències transcrites i traduïdes co\lgem aborativament sobre la plataforma web AMARA. L'actual versió del corpus conté 20 llengües. La part francesa compta amb 1.4M paraules en 139.8K frases.
+
+\item \textbf{COSMAT}: és un conjunt de frases para\lgem eles en francés i anglés extretes de resums de tesis científiques de l'arxiu obert HAL. Aquest corpus conté 32.6M paraules en 1.7M frases.
+
+\item \textbf{DGT-Acquis}~\cite{dgt}: és una família de corpus para\lgem el multilingüe extret del Diari Oficial de la Unió Europea (OJ) en format Formex 4 (XML). Consisteix en documents des de mitjans de 2004 fins a finals de 2011 en fins a 23 llengües. Consisteix en 93.2M paraules al llarg de 4.9M frases.
+
+\item \textbf{Europarl}~\cite{europarl}: s'extreu dels procediments del Parlament Europeu. Inclou versions en 21 llengües europees i es va crear originalment per a la formació de sistemes de traducció automàtica. El corpus conté 2.2M frases i 61.3M paraules.
+
+\item \textbf{EU-TT2}: es va extreure en el projecte europeu TT2~\cite{eu-tt2} del butlletí de la Unió Europea, existent en totes les llengües oficials de la Unió Europea, i està disponible públicament a Internet. 1.1M frases amb 21.2M paraules formen aquest corpus.
+
+\item \textbf{EUTV}: és un corpus construït a partir de les transcripcions de vídeos del lloc web de la EUTV (actualment anomenat Multimedia Centre from the European Parliament)~\cite{eutv}, disponible en 22 llengües diferents de la Unió Europea. El corpus conté 137.0K frases i 1.2M paraules.
+
+\item \textbf{Giga}: es compon de frases para\lgem eles en anglés i francés extretes de llocs web internacionals. Conté 754.2M paraules en 25.5M frases.
+
+\item \textbf{NC-V8}~\cite{ncv8}: News Commentary és un corpus de traducció del taller WMT que conté notícies text i comentaris del Projecte Syndicate que conté 193.7K frases i 5.4M paraules.
+
+\item \textbf{OpenSubtitles}~\cite{opensubtitles-article}: aquest corpus està format a partir de documents del lloc web OpenSubtitles~\cite{opensubtitles}. Conté un total de 327.8M paraules i 48.0M frases.
+
+\item \textbf{UN}: és el corpus de traducció de les Nacions Unides és un conjunt de dades de traducció de l'anglés al francés i de l'anglés al castellà amb sessions de l'assemblea de les Nacions Unides. Conté 400.9M paraules en 12.9M frases.
+
+\item \textbf{Voxforge}~\cite{voxforge}: és un conjunt obert de dades de veu que es va establir per recollir la parla transcrita per al seu ús amb motors de reconeixement de veu lliure i de codi obert. Actualment, conté dades en disset llengües diferents. El conjunt de dades francés conté 182.1K paraules i 16.4K frases.
+
+\item \textbf{TED}: el corpus de TED és un conjunt de transcripcions de xerrades TED del lloc web de TED. Complementa el corpus WIT3 afegint converses transcrites fins al 2015. Conté 392.3K paraules en 47.7K frases.
+
+\item \textbf{TEDx}: és un conjunt de transcripcions de les converses de TEDx (esdeveniments TED no oficials) en diverses llengües fins a 2015. Conté un total de 3.9M paraules i 477.5K frases.
+
+\item \textbf{Wikipedia}: es tracta d'un bolcat de la Viquipèdia en francés~\cite{wiki} a partir de 2015. Conté 372.8M paraules i 25.2M frases.
+
+\item \textbf{WIT3}~\cite{wit3}: s'extreu de les transcripcions multilingües de les converses de TED del lloc web de TED~\cite{ted} de 2007 a 2013. Està disponible en 5 llengües i la versió francesa conté 2.5M paraules i 143.6K frases.
+\end{itemize}
+
+La taula~\ref{tab:text_corpora} mostra, de manera resumida, les estadístiques comentades d'aquests corpus.
+
+\begin{table}[ht!]
+    \centering
+    \caption{Resum dels diferents corpus de text monolingüe utilitzats per a l'entrenament del models de llenguatge.}
+    \begin{tabular}{l|r|r}
+        \multicolumn{1}{c|}{Corpus d'entrenament}	&	\multicolumn{1}{c}{Frases} &	\multicolumn{1}{|c}{Paraules}	\\
+        \hline
+        Giga									&	22.5M							&	754.2M							    \\
+        UN										&	12.9M							&	400.9M							    \\
+        Wikipeda								&	25.2M							&	372.8M							    \\
+        OpenSubtitles							&	48.0M							&	327.8M							    \\
+        DGT-Acquis								&	4.9M							&	93.2M								\\
+        Europarl								&	2.2M							&	61.3M								\\
+        COSMAT									&	1.7M							&	32.6M								\\
+        EU-TT2									&	1.1M							&	21.2M								\\
+        News Commentary							&	193.7K						    &	5.4M								\\
+        TEDx									&	430.9K						    &	3.5M								\\
+        WIT3									&	143.6K						    &	2.5M								\\
+        AMARA									&	139.8K						    &	1.4M								\\
+        EUTV									&	137.0K						    &	1.2M								\\
+        TED										&	47.7K							&	392.3K							    \\
+        Audiobooks-1							&	18.0K							&	258.6K							    \\
+        Voxforge								&	16.4K							&	182.1K							    \\
+        \hline
+        Total									&	119.6M						    &	2.1G								\\
+    \end{tabular}
+    \label{tab:text_corpora}
+\end{table}

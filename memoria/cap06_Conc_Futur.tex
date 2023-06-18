@@ -1,0 +1,29 @@
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+
+\chapter{Conclusions i treball futur}
+\label{cap06__}
+
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+
+En aquest treball s'ha descrit el procés de creació d'un model acústic d'avantguarda per a sistemes ASR Francés híbrids. Per aconseguir-ho, s'han emprat ferramentes software avançades i altament especialitzades com TLK i Tensorflow, així com un conjunt de dades d'entrenament de 663 hores de parla francesa transcrita manualment a un total de $6.8$ milions de paraules. 
+El model acústic resultant, basat en Models Ocults de Markov amb les probabilitats d'emissió modelades per una xarxa neuronal recurrent de tipus BLSTM, ha estat combinat amb diferents models del llenguatge proporcionats per investigadors del grup de recerca MLLP-VRAIN, conformant potents sistemes ASR híbrids, aptes per funcionar en streaming.
+
+Pel que fa al model acústic desenvolupat, el model BLSTM-HMM, podem concloure amb les dades experimentals que, aquest millora significativament el model acústic multipassada del sistema baseline, aportant millores relatives de WER de fins a un 16.2\% en el conjunt de \textit{test} PoliMèdia.
+
+El millor sistema ha estat aquell que combina el nostre BLSTM-HMM AM amb una interpolació lineal d'un model de 4-grames i un Transformer LM, obtenint millores, respecte al sistema baseline, de 2.7 punts WER en UB i de 5.5 punts en PM, és a dir, entre un 15.6\% i un 22.8\% de millora relativa en funció de la tasca. A més, convé ressaltar que aquest sistema està preparat per treballar en entorns d'streaming, al contrari del sistema baseline.
+
+Aquest treball ha deixat portes obertes a molt de treball futur:
+\begin{enumerate}
+    \item Realitzar una exploració dels paràmetres per ajustar la latència del sistema per al seu ús en streaming.
+    \item Generar una imatge docker amb el millor sistema ASR per facilitar el seu desplegament al CERN.
+    \item Exploració niada dels hiperparàmetres de descodificació que s'han deixat fixes per restriccions temporals.
+    \item Ampliar el conjunt d'entrenament de dades acústiques transcrites, doncs 663 hores són poques per als actuals estàndards de la literatura (milers d'hores d'entrenament).
+    \item Recopilar conjunts de dades de \textit{dev} i \textit{test} específics del CERN, per avaluar els sistemes ASR amb dades representatives dels continguts audiovisuals que es generen en aquesta institució.
+    \item Explorar noves topologies BLSTM i Transformer. 
+\end{enumerate}
+
+
